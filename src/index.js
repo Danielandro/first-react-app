@@ -10,7 +10,7 @@ class Square extends React.Component {
     // JavaScript is contained in curly braces. 
     // Explicit return
     return (
-      <button className="square">
+      <button className="square" onClick={() => alert('Clicked')}>
         {this.props.value}
       </button>
     );
