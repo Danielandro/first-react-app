@@ -1,13 +1,17 @@
 // create Square, Board, Game components
 // File written in JSX
 
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+
 class Square extends React.Component {
   render() {
     // JavaScript is contained in curly braces. 
     // Explicit return
     return (
       <button className="square">
-        {/* TO BE FILLED */}
+        {this.props.value}
       </button>
     );
   }
@@ -16,7 +20,7 @@ class Square extends React.Component {
 class Board extends React.Component {
   // renderSquare method is method of Board class
   renderSquare(i) {
-    return <Square />; // Square component is rendered
+    return <Square value={i} />; // Square component is rendered
   }
 
   render() {
@@ -26,7 +30,7 @@ class Board extends React.Component {
       <div>
         <div className="status">{status}</div>
         <div className="board-row">
-          {this.renderSquare(0)} // call method, pass in parameter
+          {this.renderSquare(0)} {/* call method, pass in parameter */}
           {this.renderSquare(1)}
           {this.renderSquare(2)}
         </div>
@@ -60,6 +64,8 @@ class Game extends React.Component {
     );
   }
 }
+
+// ================================
 
 ReactDOM.render(
   <Game />,
