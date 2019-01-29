@@ -5,10 +5,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-class Square extends React.Component {
+// React.Component is the Super class
+class Square extends React.Component { 
   constructor(props) {
     super(props);
-    this.state = {
+    this.state = { // set component's initial state
       value: null,
     };
   }
@@ -17,8 +18,11 @@ class Square extends React.Component {
     // JavaScript is contained in curly braces. 
     // Explicit return
     return (
-      <button className="square" onClick={() => alert('Clicked')}>
-        {this.props.value}
+      <button 
+        className="square" 
+        onClick={() => this.setState({value: 'X'})}
+      >
+        {this.state.value}
       </button>
     );
   }
