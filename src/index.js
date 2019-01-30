@@ -6,19 +6,28 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 // React.Component is the Super class
-class Square extends React.Component {  
-  render() {
-    // JavaScript is contained in curly braces. 
-    // Explicit return
-    return (
-      <button 
-        className="square" 
-        onClick={() => this.props.onClick()}
-      >
-        {this.props.value}
-      </button>
-    ); 
-  }
+// class Square extends React.Component {  
+//   render() {
+//     // JavaScript is contained in curly braces. 
+//     // Explicit return
+//     return (
+//       <button 
+//         className="square" 
+//         onClick={() => this.props.onClick()}
+//       >
+//         {this.props.value}
+//       </button>
+//     ); 
+//   }
+// }
+
+// function component
+function Square(props) {
+  return (
+    <button className="square" onClick={props.onClick}>
+      {props.value}
+    </button>
+  );
 }
 
 class Board extends React.Component {
