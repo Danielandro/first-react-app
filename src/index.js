@@ -6,32 +6,45 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 // React.Component is the Super class
-class Square extends React.Component { 
-  constructor(props) {
-    super(props);
-    this.state = { // set component's initial state
-      value: null,
-    };
-  }
-
+class Square extends React.Component {  
   render() {
     // JavaScript is contained in curly braces. 
     // Explicit return
     return (
       <button 
         className="square" 
-        onClick={() => this.setState({value: 'X'})}
+        onClick={() => this.props.onClick()}
       >
-        {this.state.value}
+        {this.props.value}
       </button>
-    );
+    ); 
   }
 }
 
 class Board extends React.Component {
-  // renderSquare method is method of Board class
+  constructor(props) {
+    super(props);
+    this.state = {
+      // create an array with length = 9. Fill all elements with null
+      squares: Array(9).fill(null),      
+    };
+  }
+
+  handleClick(i) {
+    const squares = this.state.squares.slice(); // shallow copy
+    squares[i] = 'X';
+    this.setState({squares: squares});
+  }
+
+  // renderSquare is method of Board class
   renderSquare(i) {
-    return <Square value={i} />; // Square component is rendered
+    return (
+      <Square 
+      // value + onClick props passed down to Square component
+        value={this.state.squares[i]}
+        onClick={() => this.handleClick(i)}
+      />
+    ); 
   }
 
   render() {
