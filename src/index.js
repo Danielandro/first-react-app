@@ -42,6 +42,10 @@ class Board extends React.Component {
 
   handleClick(i) {
     const squares = this.state.squares.slice(); // shallow copy
+    // if there is a winner || square is not null -> do nothing on click
+    if (calculateWinner(squares) || squares[i]) {
+      return;
+    }
     squares[i] = this.state.xIsNext ? 'X' : 'O';
     this.setState({
       squares: squares,
@@ -61,7 +65,14 @@ class Board extends React.Component {
   }
 
   render() {
-    const status = `Next Player: ${this.state.xIsNext ? 'X' : 'O'}`;
+    const winner = calculateWinner(this.state.squares);
+    let status;
+    if (winner) {
+      status = `Winner: ${winner}`;
+    } else {
+      status = `Next Player: ${this.state.xIsNext ? 'X' : 'O'}`;
+    }
+    // const status = `Next Player: ${this.state.xIsNext ? 'X' : 'O'}`;
 
     return (
       <div>
@@ -125,6 +136,7 @@ function calculateWinner(squares) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
       return squares[a]; // returns X or O
-    }
+    }    
   }
+  return null;
 }
