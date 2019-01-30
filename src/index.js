@@ -21,7 +21,7 @@ import './index.css';
 //   }
 // }
 
-// function component
+// Function component
 function Square(props) {
   return (
     <button className="square" onClick={props.onClick}>
@@ -35,14 +35,18 @@ class Board extends React.Component {
     super(props);
     this.state = {
       // create an array with length = 9. Fill all elements with null
-      squares: Array(9).fill(null),      
+      squares: Array(9).fill(null),
+      xIsNext: true, // set first move to X      
     };
   }
 
   handleClick(i) {
     const squares = this.state.squares.slice(); // shallow copy
-    squares[i] = 'X';
-    this.setState({squares: squares});
+    squares[i] = this.state.xIsNext ? 'X' : 'O';
+    this.setState({
+      squares: squares,
+      xIsNext: !this.state.xIsNext,
+    });
   }
 
   // renderSquare is method of Board class
@@ -57,7 +61,7 @@ class Board extends React.Component {
   }
 
   render() {
-    const status = 'Next Player: X';
+    const status = `Next Player: ${this.state.xIsNext ? 'X' : 'O'}`;
 
     return (
       <div>
